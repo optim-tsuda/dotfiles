@@ -1,10 +1,10 @@
 # remove greeting messsage
-set -x fish_greeting
+set -gx fish_greeting
 
 # vi mode
 fish_vi_key_bindings
 
-# enable grimoh/fish-prompt
+# prompt
 function fish_mode_prompt
 end
 
@@ -32,21 +32,23 @@ alias docker-compose='docker-cli-plugin-docker-compose'
 
 # kubectl
 alias k='kubectl'
+set -gx PATH $HOME/.asdf/installs/krew/0.43/bin $PATH
 
 # go
-set -gx GOPATH $HOME/.packages/go
-set PATH $GOPATH/bin $PATH
+set -gx GOPATH $HOME/Documents/workspace
+set -gx GOPATH $HOME/.packages/go $GOPATH
+set -gx PATH $GOPATH/bin $PATH
 
 # npm
 set -gx NPM_CONFIG_PREFIX $HOME/.packages/npm
-set PATH $NPM_CONFIG_PREFIX/bin $PATH
+set -gx PATH $NPM_CONFIG_PREFIX/bin $PATH
 
 # mysql
 set -gx DATADIR $HOME/.data/mysql
 # To initialize a new database
-#       mysqld --initialize-insecure --datadir=$DATADIR
-#       mysql_ssl_rsa_setup --datadir=$DATADIR
+# 	mysqld --initialize-insecure --datadir=$DATADIR
+# 	mysql_ssl_rsa_setup --datadir=$DATADIR
 # To run the server:
-#       mysqld_safe --datadir=$DATADIR
+# 	mysqld_safe --datadir=$DATADIR
 # To stop the server:
-#       mysqladmin -u root shutdown
+# 	mysqladmin -u root shutdown

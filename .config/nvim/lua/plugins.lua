@@ -351,9 +351,11 @@ function()
   -- markdown
   use {
     'iamcco/markdown-preview.nvim',
-    ft = { 'markdown' },
+    ft = { 'markdown', 'mdx' },
     run = ':call mkdp#util#install()',
-    setup = [[require('config.markdown-preview')]],
+    setup = function()
+			require('config.markdown-preview')
+		end,
   }
   use {
     'dhruvasagar/vim-table-mode',
