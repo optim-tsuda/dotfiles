@@ -37,7 +37,7 @@ cmp.setup {
   }),
   formatting = {
     format = lspkind.cmp_format({
-      mode = 'symbol_text',
+       with_text = true,
       maxwidth = 50,
     })
   },
@@ -47,7 +47,8 @@ cmp.setup {
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
 
-vim.g.completeopt = 'menu,menuone,noselect'
+-- vim.g.completeopt = 'menu,menuone,noselect'
 vim.cmd [[
+  set completeopt=menuone,noinsert,noselect
   highlight! default link CmpItemKind CmpItemMenuDefault
 ]]
