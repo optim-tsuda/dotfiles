@@ -1,11 +1,12 @@
 -- https://github.com/neovim/nvim-lspconfig
 
-local status, config = pcall(require,'lspconfig')
+local status, config = pcall(require, 'lspconfig')
 if (not status) then return end
 
 local set = vim.keymap.set
+
+-- format on save
 local on_attach = function(client, bufnr)
-  -- format on save
   if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = vim.api.nvim_create_augroup("Format", { clear = true }),
@@ -16,9 +17,9 @@ local on_attach = function(client, bufnr)
 end
 
 -- sql
-config.sqls.setup{}
+config.sqls.setup {}
 -- lua
-config.sumneko_lua.setup{
+config.sumneko_lua.setup {
   on_attach = on_attach,
   settings = {
     Lua = {
@@ -30,9 +31,9 @@ config.sumneko_lua.setup{
   },
 }
 -- docker
-config.dockerls.setup{}
+config.dockerls.setup {}
 -- go
-config.gopls.setup{
+config.gopls.setup {
   on_attach = on_attach,
   cmd = { 'gopls', 'serve' },
   settings = {
@@ -48,17 +49,21 @@ config.gopls.setup{
   },
 }
 -- js
-config.quick_lint_js.setup{}
+config.quick_lint_js.setup {}
 -- terraform
-config.terraformls.setup{}
+config.terraformls.setup {
+  on_attach = on_attach,
+  filetypes = { 'terraform', 'tf' },
+  cmd = { 'terraform-ls', 'serve' }
+}
 -- typescript
-config.tsserver.setup{
+config.tsserver.setup {
   on_attach = on_attach,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
   cmd = { "typescript-language-server", "--stdio" }
 }
 -- yaml
-config.yamlls.setup{}
+config.yamlls.setup {}
 
 set('n', 'li', ':LspInfo<Return>', { noremap = true })
 set('n', 'ls', ':LspStart<Return>', { noremap = true })
